@@ -104,12 +104,12 @@ reversed_g = data |> Enum.map(fn x -> String.graphemes(x) |> Enum.reverse() end)
 
 values_part1 =
   Enum.zip(graphemes, reversed_g)
-  |> Enum.map(&Foo.grab_numbers_2/1)
+  |> Enum.map(&Foo.grab_numbers/1)
   |> Enum.map(&Foo.parse_num/1)
 
 values_part2 =
   Enum.zip(graphemes, reversed_g)
-  |> Enum.map(&Foo.grab_numbers/1)
+  |> Enum.map(&Foo.grab_numbers_2/1)
   |> Enum.map(&Foo.parse_num/1)
 
 values_part2 |> Enum.sum() |> IO.inspect()
