@@ -86,7 +86,7 @@ defmodule Foo do
   end
   
   def readfile() do
-    {:ok, data} = File.read("puzzle1.txt")
+    {:ok, data} = File.read("input")
     data
   end
 end
