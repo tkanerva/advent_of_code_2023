@@ -42,7 +42,6 @@ Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
   def make_copies(m, amount, idx, _n_rows, 0 ), do: m
   def make_copies(m, amount, idx, n_rows, range ) do
     # need to verify we are not accessing stuff outside of the nrows
-    IO.inspect {:amount, amount}
     tmp =
     cond do
       idx+range > n_rows -> m
