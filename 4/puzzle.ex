@@ -41,8 +41,6 @@ Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
 
   def make_copies(m, amount, idx, _n_rows, 0 ), do: m
   def make_copies(m, amount, idx, n_rows, range ) do
-    #IO.puts("make_copies    idx #{idx} / range #{inspect(range)}" )
-    #IO.inspect({n_rows, m}, label: "|mkcopies|")
     # need to verify we are not accessing stuff outside of the nrows
     IO.inspect {:amount, amount}
     tmp =
@@ -51,33 +49,25 @@ Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
       true ->
         m |> Map.update(idx+range, [], fn cur -> cur ++ List.duplicate(hd(cur), amount) end)
     end
-
     make_copies(tmp, amount, idx, n_rows, range-1 )
   end  
 
   def do_iter(new, idx, _n_rows, 0), do: new
   def do_iter(new, idx, n_rows, count) do
-    #IO.puts "do_iter"
     range = Map.get(new, idx) |> hd
     # do not iterate over our map limit
     range = cond do
       idx + range > n_rows -> n_rows
       true -> range
       end
-    new = make_copies(new, count, idx, n_rows, range)
-    #IO.inspect( { idx, n_rows, count, new})
-    #do_iter(new, idx, n_rows, count-1)
-    new
+    make_copies(new, count, idx, n_rows, range)
   end
 
   def iter_thru(cardmap, idx, nrows) when idx >= nrows, do: cardmap
   def iter_thru(cardmap, idx, nrows) do
-    #IO.puts("******* iter_thru #{idx} #{nrows}")
     get_count = fn m -> length(Map.get(m, idx, [])) end
     count = get_count.(cardmap, idx)
-    #IO.inspect {count, cardmap |> Map.get(5,[]) }
     new_map = Foo.do_iter(cardmap, idx, nrows, count)
-    #IO.inspect(new_map, label: "------------------ newmap")
     iter_thru(new_map, idx+1, nrows)
   end
 end
