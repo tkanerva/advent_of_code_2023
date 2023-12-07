@@ -41,19 +41,19 @@ defmodule Foo do
 	[a, a, a, a, a ] -> :fiveofakind
 	[a, a, b, b, b ] -> :fullhouse
 	[a, a, a, b, b ] -> :fullhouse
-	[a, a, a, a, b ] -> :fourofakind
-	[b, a, a, a, a ] -> :fourofakind
-	[a, a, a, b, c ] -> :threeofakind
-	[b, a, a, a, c ] -> :threeofakind
-	[b, c, a, a, a ] -> :threeofakind
-	[a, a, b, c, c ] -> :twopair
-	[a, a, c, c, b ] -> :twopair
-	[b, a, a, c, c ] -> :twopair
-	[a, a, b, c, d ] -> :onepair
-	[b, a, a, c, d ] -> :onepair
-	[b, c, a, a, d ] -> :onepair
-	[b, c, d, a, a ] -> :onepair
-	[a, b, c, d, e ] -> :highcard
+	[a, a, a, a, _ ] -> :fourofakind
+	[_, a, a, a, a ] -> :fourofakind
+	[a, a, a, _, _ ] -> :threeofakind
+	[_, a, a, a, _ ] -> :threeofakind
+	[_, _, a, a, a ] -> :threeofakind
+	[a, a, _, c, c ] -> :twopair
+	[a, a, c, c, _ ] -> :twopair
+	[_, a, a, c, c ] -> :twopair
+	[a, a, _, _, _ ] -> :onepair
+	[_, a, a, _, _ ] -> :onepair
+	[_, _, a, a, _ ] -> :onepair
+	[_, _, _, a, a ] -> :onepair
+	[_, _, _, _, _ ] -> :highcard
 	_ -> nil
       end
     { hand_str |> string_to_hand, hand_type }
